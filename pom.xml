@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.example</groupId> <!-- Mude para o seu group ID -->
+    <artifactId>controle-caixa-javafx</artifactId> <!-- Mude para o seu artifact ID -->
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <!-- Define a versão do JavaFX a ser utilizada -->
+        <javafx.version>17</javafx.version>
+        <!-- Define a versão do Java para compilação e execução -->
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <!-- Define a codificação dos arquivos -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+        <!-- Dependências do JavaFX -->
+        <!-- Module controls (necessário para a maioria dos componentes de UI) -->
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+            <version>${javafx.version}</version>
+        </dependency>
+        <!-- Module graphics (essencial para Scene e Stage, geralmente incluído por controls) -->
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-graphics</artifactId>
+            <version>${javafx.version}</version>
+        </dependency>
+        <!-- Adicione outros módulos JavaFX se precisar (ex: javafx-fxml, javafx-web, etc.) -->
+        <!-- Exemplo (comente se não for usar FXML)
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-fxml</artifactId>
+            <version>${javafx.version}</version>
+        </dependency>
+        -->
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!-- Plugin para compilação do Java -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version> <!-- Use uma versão recente -->
+                <configuration>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
+                </configuration>
+            </plugin>
+
+            <!-- Plugin oficial do JavaFX Maven -->
+            <!-- Facilita a execução e empacotamento de aplicações JavaFX -->
+            <plugin>
+                <groupId>org.openjfx</groupId>
+                <artifactId>javafx-maven-plugin</artifactId>
+                <version>0.0.8</version> <!-- Use a versão mais recente -->
+                <configuration>
+                    <!-- Define a classe principal da sua aplicação JavaFX -->
+                    <mainClass>gui.TelaCaixaFX</mainClass>
+                    <!-- Opcional: Configurações para criar imagem JLink -->
+                    <jlinkImageName>${project.artifactId}</jlinkImageName>
+                    <launcher>start</launcher>
+                    <jlinkZipName>run-${project.artifactId}</jlinkZipName>
+                </configuration>
+                <executions>
+                    <execution>
+                        <!-- Configuração para empacotar a aplicação como módulo -->
+                        <id>default-cli</id>
+                        <configuration>
+                            <mainClass>gui.TelaCaixaFX</mainClass>
+                            <launcher>app</launcher>
+                            <jlinkZipName>run-${project.artifactId}</jlinkZipName>
+                            <jlinkImageName>image-${project.artifactId}</jlinkImageName>
+                            <stripDebug>true</stripDebug>
+                            <noHeaderFiles>true</noHeaderFiles>
+                            <noManPages>true</noManPages>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>
